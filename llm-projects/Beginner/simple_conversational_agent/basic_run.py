@@ -1,6 +1,6 @@
 """
 INSTALLATION:
-    %pip install -U langchain langgraph langsmith
+    %pip install -U langchain langgraph
     %pip install -qU "langchain[openai]"
     %pip install -q python-dotenv
 """
