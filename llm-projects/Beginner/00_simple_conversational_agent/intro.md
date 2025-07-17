@@ -41,12 +41,12 @@ $ python interactive.py # 终端交互
 ```
 
 ## 基本方法解析
-> **提示：**
-> **以下示例代码不等同于教程代码（`basic_run.py`,`interactive.py`），仅作为示例代码。你可能需要稍作修改以作运行。不过，理解代码是最重要的。**
+> **提示：**<br>
+> **以下示例代码不等同于教程代码（`basic_run.py`,`interactive.py`），仅作为示例代码。你可能需要稍作修改以作运行。不过，理解代码是最重要的。**<br>
 > **例如：对于核心点一，如果不配置官方 API 无法运行。如要尝试运行建议参考教程代码（使用中转 API），额外配置 `base_url`&`api_key`，并统一将`model_provider`设置为`openai`，否则会报错。**
 ### 核心点一：初始化模型和模型调用
-> **（建议）**API文档：[init_chat_model](../../../docs/api/init_chat_model.md)
-> **（可选择）**底层实现：参考 LangChain 源代码中的初始化模型方法 [init_chat_model](https://github.com/langchain-ai/langchain/blob/master/libs/langchain/langchain/chat_models/base.py)
+> **（建议）**API文档：[init_chat_model.md](../../../docs/api/init_chat_model.md)；<br>
+> **（可选择）**底层实现：参考 LangChain 源代码中的初始化模型方法 [base.py](https://github.com/langchain-ai/langchain/blob/master/libs/langchain/langchain/chat_models/base.py).<br>
 #### （1）基本示例代码:
 ```python
 import getpass
@@ -156,7 +156,7 @@ openai.OpenAIError: The api_key client option must be set either by passing api_
 ```
 
 ## 备注
-如果你的代码运行不通，请安装 `依赖 -> 环境（base_url、api_key） -> 模型提供商设置 -> 中转网站日志查看是否有请求进来` 的顺序检查代码。
-如若还是没办法解决，欢迎在 [CodeDriver/AICourse](https://github.com/CodeDriverTech/AICourse) 内提交 Issue，或联系作者邮箱: JHxu77@gmail.com。如果你是牧码南山成员应该可以在飞书群或通过学长学姐联系到我，期待你的来信！
+如果你的代码运行不通，请按照 `依赖 -> 环境（base_url、api_key） -> 模型提供商设置 -> 中转网站日志查看是否有请求进来` 的顺序检查代码。<br>
+如若还是没办法解决，欢迎在 [CodeDriver/AICourse](https://github.com/CodeDriverTech/AICourse) 内提交 Issue，或联系作者邮箱: JHxu77@gmail.com。如果你是牧码南山成员应该可以在飞书群或通过学长学姐联系到我，期待你的来信！<br>
 
 **当然，你成功的解决了某个 Bug，或觉得文档有误 or 需要补充。欢迎你进行 Contribution，一起完善课程，让更多的同学受益！！**
