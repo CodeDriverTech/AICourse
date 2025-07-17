@@ -45,7 +45,8 @@ $ python interactive.py # 终端交互
 > **以下示例代码不等同于教程代码（`basic_run.py`,`interactive.py`），仅作为示例代码。你可能需要稍作修改以作运行。不过，理解代码是最重要的。**
 > **例如：对于核心点一，如果不配置官方 API 无法运行。如要尝试运行建议参考教程代码（使用中转 API），额外配置 `base_url`&`api_key`，并统一将`model_provider`设置为`openai`，否则会报错。**
 ### 核心点一：初始化模型和模型调用
-> （可选择）底层实现：参考 LangChain 源代码中的初始化模型方法 [init_chat_model](https://github.com/langchain-ai/langchain/blob/master/libs/langchain/langchain/chat_models/base.py)
+> **（建议）**API文档：[[APIdoc]init_chat_model](init_chat_model.md)
+> **（可选择）**底层实现：参考 LangChain 源代码中的初始化模型方法 [init_chat_model](https://github.com/langchain-ai/langchain/blob/master/libs/langchain/langchain/chat_models/base.py)
 #### （1）基本示例代码:
 ```python
 import getpass
