@@ -8,7 +8,8 @@ OpenAI 在 [“A pratical guide to building agents”](../../../docs/pdf/a-pract
 LLM 时代的 Agent 通常指的是**以 LLM 驱动的自主智能体系统**，社区内[^1]大家通常对它定义了四个关键组件（见下图）：规划（Planning）、Memory（记忆）、Tool Use（工具使用）、行动（Action）。
 
 ![Figure 1: Agent System](../../../assets/agent_system.png)
-
+*Figure 1: Agent System*
+<br>
 通常来说，工具使用（Tool Use）包含三种类型：
 | 类型   | 描述                                                         | 示例                                     |
 |--------|------------------------------------------------------------|------------------------------------------|
@@ -146,11 +147,11 @@ graph_builder.add_edge("chatbot", END)
 graph = graph_builder.compile()
 ```
 
-## 引用
-[^1]: [社区文章：LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/#agent-system-overview)
-
 ## 备注
 如果你的代码运行不通，请按照 `依赖 -> 环境（base_url、api_key） -> 模型提供商设置 -> 中转网站日志查看是否有请求进来` 的顺序检查代码。<br>
 如若还是没办法解决，欢迎在 [CodeDriver/AICourse](https://github.com/CodeDriverTech/AICourse) 内提交 Issue，或联系作者邮箱: JHxu77@gmail.com。如果你是牧码南山成员应该可以在飞书群或通过学长学姐联系到我，期待你的来信！<br>
 
 **当然，你成功的解决了某个 Bug，或觉得文档有误 or 需要补充。欢迎你进行 Contribution，一起完善课程，让更多的同学受益！！**
+
+## 引用
+[^1]: [社区文章：LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/#agent-system-overview)
