@@ -10,9 +10,9 @@
 
 而在 Anthropic（Claude）中则给出了更严谨的界限：
 
-  *在 Anthropic，将所有的 Agent 定义变体归类为：Agentic Systems，但在 Workflows 和 Agents 之间划出了一个重要的架构区别：*
-    - *Workflow 是通过预定义代码路径协调 LLM 和工具的系统；*
-    - *Agents 是 LLM 动态指导其自身流程和工具使用的系统，可以控制其完成任务的方式。*
+  *在 Anthropic，将所有的 Agent 定义变体归类为：Agentic Systems，但在 Workflows 和 Agents 之间划出了一个重要的架构区别：*<br>
+    - *Workflow 是通过预定义代码路径协调 LLM 和工具的系统；*<br>
+    - *Agents 是 LLM 动态指导其自身流程和工具使用的系统，可以控制其完成任务的方式。*<br>
 
 以下有一种简单的方式来可视化这些差异：
 ![image](../../../assets/workflow&agent.png)
