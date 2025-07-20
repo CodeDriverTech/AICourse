@@ -47,7 +47,7 @@ OPENAI_API_KEY="..."
 ### 4. 运行代码
 ```bash
 $ python run_langchain.py # 基于 LangChain 的实现
-$ python run_langgraph.py # 基于 LangGraph 的实现
+$ python run_langgraph.py # 基于 LangGraph 的实现（该代码不是完整示例，无法交互。尝试自己添加下交互方法吧！）
 ```
 
 ## 基本方法解析
