@@ -1,0 +1,20 @@
+# 核心依赖
+langchain>=0.3.27
+langgraph>=0.5.4
+langchain-core>=0.3.72
+langchain-openai>=0.3.28
+
+# API和网络请求
+openai>=1.91.1
+requests>=2.32.4
+urllib3>=2.5.0
+
+# PDF处理
+pdfplumber>=0.11.7
+
+# 数据处理和验证
+pydantic>=2.11.7
+python-dotenv>=1.1.1
+
+# 类型提示
+typing-extensions>=4.14.1
