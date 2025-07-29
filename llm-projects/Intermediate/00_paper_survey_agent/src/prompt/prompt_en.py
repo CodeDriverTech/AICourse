@@ -151,3 +151,75 @@ Environment Variables:
   
 For more information, please visit the project documentation.
 """
+
+# ========================= Survey Generation Related Prompts =========================
+
+# Paper content analysis prompt
+paper_analysis_prompt = """
+Please carefully analyze the following paper content and extract key information for survey report generation.
+Survey Topic: {topic}
+
+Paper Content:
+{paper_content}
+
+Please extract the paper's title, abstract, key contributions, research methodology, limitations, and evaluate its relevance to the survey topic (1-10 scale).
+"""
+
+# Survey outline planning prompt
+survey_outline_prompt = """
+As the coordinator for the survey report, please plan a structurally complete academic survey outline based on the following information:
+
+Survey Topic: {topic}
+
+Analyzed Paper Summaries:
+{paper_summaries}
+
+Please generate an outline containing the following standard academic survey sections:
+1. Introduction (Background, Research Questions, Survey Objectives)
+2. Research Methodology (Literature Search Strategy, Selection Criteria)
+3. Main Research Findings (Categorized by Theme)
+4. Methodological Comparison and Analysis
+5. Research Trends and Development Directions
+6. Limitations and Challenges
+7. Conclusions and Future Work
+
+Each section should have a clear title and description of its main content.
+"""
+
+# Survey section content generation prompt
+survey_section_prompt = """
+Please write detailed content for the following section of an academic survey report:
+
+Section Title: {section_title}
+Section Description: {section_description}
+Survey Topic: {topic}
+
+Relevant Paper Information:
+{paper_info}
+
+Writing Requirements:
+1. Use academic writing style with rigorous and precise language
+2. Appropriately cite relevant papers (in "Author et al." format)
+3. Content should be logical and coherent
+4. Use Markdown format with appropriate heading levels
+5. Each paragraph should have a clear theme
+6. Word count should be controlled between 800-1200 words
+
+Please start writing the section content directly, without including section number prefixes.
+"""
+
+# Survey title and abstract generation prompt
+survey_title_abstract_prompt = """
+Based on the following survey content, generate a professional academic survey title and abstract:
+
+Survey Topic: {topic}
+Number of Papers: {paper_count}
+
+Please generate:
+1. An accurate, specific, and engaging survey title (in English)
+2. A 200-300 word survey abstract including: research background, literature scope, main findings, conclusions
+
+Format:
+Title: [Your Title]
+Abstract: [Your Abstract]
+"""

@@ -10,12 +10,15 @@ graph TD;
 	tools(tools)
 	agent(agent)
 	judge(judge)
+	generate_survey(generate_survey)
 	__end__([<p>__end__</p>]):::last
 	__start__ --> decision_making;
+	agent -.-> generate_survey;
 	agent -. &nbsp;end&nbsp; .-> judge;
 	agent -. &nbsp;continue&nbsp; .-> tools;
 	decision_making -. &nbsp;end&nbsp; .-> __end__;
 	decision_making -.-> planning;
+	generate_survey --> judge;
 	judge -. &nbsp;end&nbsp; .-> __end__;
 	judge -.-> planning;
 	planning --> agent;
