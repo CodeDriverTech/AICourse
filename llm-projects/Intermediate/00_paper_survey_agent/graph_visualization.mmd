@@ -1,0 +1,28 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	decision_making(decision_making)
+	planning(planning)
+	tools(tools)
+	agent(agent)
+	judge(judge)
+	generate_survey(generate_survey)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> decision_making;
+	agent -. &nbsp;end&nbsp; .-> judge;
+	agent -. &nbsp;continue&nbsp; .-> tools;
+	decision_making -. &nbsp;end&nbsp; .-> __end__;
+	decision_making -.-> planning;
+	judge -. &nbsp;end&nbsp; .-> __end__;
+	judge -.-> generate_survey;
+	judge -.-> planning;
+	planning --> agent;
+	tools --> agent;
+	generate_survey --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc
