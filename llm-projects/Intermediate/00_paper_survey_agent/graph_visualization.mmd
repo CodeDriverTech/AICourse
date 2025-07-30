@@ -13,17 +13,16 @@ graph TD;
 	generate_survey(generate_survey)
 	__end__([<p>__end__</p>]):::last
 	__start__ --> decision_making;
-	agent -.-> generate_survey;
 	agent -. &nbsp;end&nbsp; .-> judge;
 	agent -. &nbsp;continue&nbsp; .-> tools;
 	decision_making -. &nbsp;end&nbsp; .-> __end__;
 	decision_making -.-> planning;
-	generate_survey --> judge;
 	judge -. &nbsp;end&nbsp; .-> __end__;
+	judge -.-> generate_survey;
 	judge -.-> planning;
 	planning --> agent;
 	tools --> agent;
-	agent -.-> __end__;
+	generate_survey --> __end__;
 	classDef default fill:#f2f0ff,line-height:1.2
 	classDef first fill-opacity:0
 	classDef last fill:#bfb6fc

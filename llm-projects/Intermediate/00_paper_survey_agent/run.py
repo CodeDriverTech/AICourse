@@ -7,8 +7,6 @@
 
 使用方法：
     python run.py
-    python run.py --L cn    # 使用中文提示词
-    python run.py --Language en  # 使用英文提示词
 
 环境要求：
     - OPENAI_API_KEY: OpenAI API密钥
@@ -16,6 +14,8 @@
     - DEFAULT_MODEL: 默认模型
     - CORE_API_KEY: CORE API密钥 (可在 https://core.ac.uk/services/api#form 申请)
     - TEMPERATURE: 温度参数
+    - MAX_SURVEY_REFERENCE: 最大参考文献数量
+    - SAVE_DIR: 保存目录
 """
 
 from enum import Enum
@@ -283,6 +283,9 @@ def download_paper(url: str) -> str:
             'Accept-Encoding': 'gzip, deflate, br',
             'Connection': 'keep-alive',
         }
+
+        if "arxiv.org/abs" in url:
+            url = url.replace("arxiv.org/abs", "arxiv.org/pdf")
         
         max_retries = 5
         for attempt in range(max_retries):
@@ -294,14 +297,17 @@ def download_paper(url: str) -> str:
                 os.makedirs(save_dir, exist_ok=True)
 
                 import re
+                import uuid
                 from urllib.parse import urlparse
 
                 parsed_url = urlparse(url)
                 filename = os.path.basename(parsed_url.path)
-                if not filename.endswith('.pdf'):
-                    # 如果无法从URL获取文件名，使用时间戳
+                # print(f"[DEBUG] PDF文件预期保存文件名: {filename}")
+                if not str(filename).endswith('.pdf'):
+                    # 如果无法从URL获取文件名，使用时间戳+uuid
                     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                    filename = f"paper_{timestamp}.pdf"
+                    unique_id = str(uuid.uuid4())
+                    filename = f"{timestamp}_{unique_id}.pdf"
                 
                 # 移除不安全字符
                 filename = re.sub(r'[<>:"/\\|?*]', '_', filename)
@@ -400,9 +406,6 @@ def should_continue(state: AgentState) -> Literal["continue", "end"]:
     if last_message.tool_calls:
         return "continue"
     else:
-        if state["type"] == TypeEnum.report:
-            state["messages"][0].content = f"{state['messages'][0].content}".replace(f"查询 {MAX_SURVEY_REFERENCE} 篇能够辅助论文主题", "").replace("的相关可引用论文。\n无论论文主题是什么，你的任务仅有查询。", "")
-            return "generate_survey"
         return "end"
 
 # ========================= 综述生成相关模型 =========================
@@ -586,7 +589,9 @@ def generate_survey_agent(state: AgentState) -> Dict[str, Any]:
         )
         
         survey_outline = planner_llm.invoke([HumanMessage(content=outline_prompt_text)])
-        print(f"📋 生成了 {len(survey_outline.sections)} 个综述章节")
+        print(f"📋 生成了 {len(survey_outline.sections)} 个综述章节:")
+        for i, section in enumerate(survey_outline.sections):
+            print(f"  {i+1}. {section.title}")
 
         print("✍️ 工作者阶段：并行生成各章节详细内容...")
         
@@ -647,7 +652,7 @@ def generate_survey_agent(state: AgentState) -> Dict[str, Any]:
 - 报告保存位置：{survey_filename}
 
 📝 **综述预览：**
-{full_survey[:1000]}...
+{full_survey[:10000]}...
 
 💡 完整综述报告已保存到本地文件，您可以进一步编辑和完善。
         """
@@ -684,6 +689,9 @@ def judge_node(state: AgentState) -> Dict[str, Any]:
 def final_answer_router(state: AgentState) -> Literal["planning", "end"]:
     """最终答案路由器：结束工作流或改进答案"""
     if state["is_good_answer"]:
+        if state["type"] == TypeEnum.report:
+            state["messages"][0].content = f"{state['messages'][0].content}".replace(f"查询 {MAX_SURVEY_REFERENCE} 篇能够辅助论文主题", "").replace("的相关可引用论文。\n无论论文主题是什么，你的任务仅有查询。", "")
+            return "generate_survey"
         return "end"
     else:
         return "planning"
@@ -720,16 +728,16 @@ workflow.add_conditional_edges(
     should_continue,
     {
         "continue": "tools",
-        "generate_survey": "generate_survey",
         "end": "judge",
     },
 )
-workflow.add_edge("generate_survey", "judge")
+workflow.add_edge("generate_survey", END)
 workflow.add_conditional_edges(
     "judge",
     final_answer_router,
     {
         "planning": "planning",
+        "generate_survey": "generate_survey",
         "end": END,
     }
 )
