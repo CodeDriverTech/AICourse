@@ -50,8 +50,9 @@ graph TD;
 	classDef first fill-opacity:0
 	classDef last fill:#bfb6fc
 ```
-🔧 工作流程
+<br>
 
+🔧 工作流程
 1. **决策节点**：分析用户查询，判断是否需要进行论文研究
 2. **规划节点**：制定详细的搜索和分析计划
 3. **搜索节点**：通过CORE API搜索相关学术论文
