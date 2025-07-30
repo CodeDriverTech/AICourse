@@ -26,6 +26,7 @@
 - 🎯 **质量保障机制**：多层次的内容验证和优化流程
 <br>
 ```mermaid
+<br>
 graph TD;
 	__start__([<p>__start__</p>]):::first
 	decision_making(decision_making)
@@ -49,6 +50,7 @@ graph TD;
 	classDef default fill:#f2f0ff,line-height:1.2
 	classDef first fill-opacity:0
 	classDef last fill:#bfb6fc
+<br>
 ```
 <br>
 
