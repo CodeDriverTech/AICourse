@@ -25,34 +25,8 @@
 - 📝 **自动综述生成**：基于协调者-工作者模式生成高质量综述
 - 🎯 **质量保障机制**：多层次的内容验证和优化流程
 <br>
-```mermaid
-<br>
-graph TD;<br>
-	__start__([<p>__start__</p>]):::first<br>
-	decision_making(decision_making)<br>
-	planning(planning)<br>
-	tools(tools)<br>
-	agent(agent)<br>
-	judge(judge)<br>
-	generate_survey(generate_survey)<br>
-	__end__([<p>__end__</p>]):::last<br>
-	__start__ --> decision_making;<br>
-	agent -. &nbsp;end&nbsp; .-> judge;<br>
-	agent -. &nbsp;continue&nbsp; .-> tools;<br>
-	decision_making -. &nbsp;end&nbsp; .-> __end__;<br>
-	decision_making -.-> planning;<br>
-	judge -. &nbsp;end&nbsp; .-> __end__;<br>
-	judge -.-> generate_survey;<br>
-	judge -.-> planning;<br>
-	planning --> agent;<br>
-	tools --> agent;<br>
-	generate_survey --> __end__;<br>
-	classDef default fill:#f2f0ff,line-height:1.2<br>
-	classDef first fill-opacity:0<br>
-	classDef last fill:#bfb6fc<br>
-<br>
-```
-<br>
+
+[Mermaid 工作流程图表](./graph_visualization.mmd)
 
 🔧 工作流程
 1. **决策节点**：分析用户查询，判断是否需要进行论文研究
