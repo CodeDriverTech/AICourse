@@ -324,8 +324,19 @@ src/
 2. **网络连接问题**：确认能够访问 OpenAI 和 CORE API
 3. **文献查询失败**：首先检查网络环境，其次检查 CORE API 是否产生了速率限制
 4. **Tokens 超出**：请尽量选择上下文长度在 64K 以上的模型，否则极有可能因为上下文窗口溢出而失败
+5. **Schema 语句错误**: 
+    > Error code: 500 - {'error': {'message': 'Invalid JSON payload received. Unknown name "$defs" at \'generation_config.response_schema\': Cannot find field. (request id: 2025073111273798118528000xYOsgP)', 'type': '', 'param': '', 'code': 400}}
+    - 最快速的解决方案是使用 OpenAI 家的模型；
+    - 而这个问题的产生是因为你在采用 Pydantic 进行数据模型定义并传入请求方法后，会被转为 JSON Schema，这些 Schema 包含一些高级特性，如 `$defs`，`$ref` 等；
+    - 由于地区限制，我们的通常采用中转 API 的方式来获取这些模型的响应，并统一使用 OpenAI 库进行请求（这就是为什么我们在使用 LangChain、LangGraph 进行模型定义时，必须指定模型提供商为 OpenAI，见 `run.py#L96`）；
+    - 而如果你采用 OpenAI 库来请求其他模型，如 Gemini。一旦该模型对 OpenAI 库不那么友好，那么你可能需要自己对 Schema 语句做一层处理，来手动删除这些高级特性，以保证结构化输出能够正确调用；
+    - 当然，你也可以统一采用 CURL 的方式进行请求，这样就不存在以上问题了。
+6. **JSON 解析错误**
+    > Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='<think>\n 我需要分...eport", "answer": None', input_type=str]
+    - 请检查你使用的模型是否支持结构化输出（部分思考模型不支持结构化输出）；
+    - 如果你想利用思考模型来提升生成质量，可以考虑嵌入一个支持结构化输出的小模型来格式化思考结果。
 
-> 如若还是没办法解决，欢迎在 [CodeDriver/AICourse](https://github.com/CodeDriverTech/AICourse) 内提交 Issue，或联系作者邮箱: JHxu77@gmail.com。如果你是牧码南山成员应该可以在飞书群或通过学长学姐联系到我，期待你的来信！
+> 如若仍遇到无法解决的问题，欢迎在 [CodeDriver/AICourse](https://github.com/CodeDriverTech/AICourse) 内提交 Issue，或联系作者邮箱: JHxu77@gmail.com。如果你是牧码南山成员应该可以在飞书群或通过学长学姐联系到我，期待你的来信！
 
 ### 性能调优建议
 
